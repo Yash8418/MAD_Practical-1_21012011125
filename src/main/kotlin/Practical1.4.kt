@@ -5,7 +5,8 @@ fun main()
     val sc = Scanner(System.`in`)
     println("Enter Number:")
     val r=sc.nextInt()
-    if(r%2==0){
+    if(r%2==0)
+    {
         println("Number is even")
     }
     else{
