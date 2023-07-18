@@ -12,6 +12,7 @@ fun main()
     var h:Short = -2
     var i:Byte = 127
 
+
     println("$a is a integer")
     println("$b is a Float")
     println("$c is a Char")
