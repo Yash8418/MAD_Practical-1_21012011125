@@ -20,6 +20,7 @@ fun main()
         10-> print("October")
         11-> print("November")
         12-> print("December")
+        else->print("Enter Proper Month")
 
 
     }
