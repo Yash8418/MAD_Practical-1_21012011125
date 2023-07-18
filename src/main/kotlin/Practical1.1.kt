@@ -15,6 +15,12 @@ fun main()
     println("$a is a integer")
     println("$b is a Float")
     println("$c is a Char")
+    println("$d is a String")
+    println("$e is a Boolean")
+    println("$f is a Double")
+    println("$g is a Long")
+    println("$h is a Short")
+    println("$i is a Byte")
 
 
 }
