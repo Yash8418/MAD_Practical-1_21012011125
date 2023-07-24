@@ -27,11 +27,4 @@ fun main()
     println("College Name : $f")
     println("University Name : $g")
     println("Age : $h")
-
-
-
-
-
-
-
 }
