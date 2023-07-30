@@ -1,117 +1,85 @@
-class Matrix(private val rows: Int, private val cols: Int) {
-    val data: Array<Array<Int>> = Array(rows) { Array(cols) { 0 } }
+import kotlin.math.min
 
-    fun showMatrix(a:Matrix){
-        for(i in 0 until rows){
-            for (j in 0 until cols){
-                print("${a.data[i][j]} ");
-            }
-            println();
-        }
-    }
+class Matrix(var data:Array<IntArray>, var rows:Int, var cols:Int)
+{
+    operator fun plus(other: Matrix): Array<IntArray> {
 
-    operator fun plus(other: Matrix): Matrix {
-        require(rows == other.rows && cols == other.cols) { "Matrix dimensions must be the same for addition." }
-
-        val result = Matrix(rows, cols)
+        val resultData = Array(rows) {IntArray(cols) }
         for (i in 0 until rows) {
             for (j in 0 until cols) {
-                result.data[i][j] = this.data[i][j] + other.data[i][j]
+                resultData[i][j] = this.data[i][j] + other.data[i][j]
             }
         }
-        return result
+        return resultData
     }
 
-    operator fun minus(other: Matrix): Matrix {
-        require(rows == other.rows && cols == other.cols) { "Matrix dimensions must be the same for subtraction." }
+    operator fun minus(other: Matrix): Array<IntArray> {
 
-        val result = Matrix(rows, cols)
+        val resultData = Array(rows) {IntArray(cols) }
         for (i in 0 until rows) {
             for (j in 0 until cols) {
-                result.data[i][j] = this.data[i][j] - other.data[i][j]
+                resultData[i][j] = this.data[i][j] - other.data[i][j]
             }
         }
-        return result
+        return resultData
     }
 
-    operator fun times(other: Matrix): Matrix {
-        require(cols == other.rows) { "Number of columns in the first matrix must be equal to the number of rows in the second matrix for multiplication." }
+    operator fun times(other: Matrix): Array<IntArray> {
 
-        val result = Matrix(rows, other.cols)
+        val resultData = Array(rows) {IntArray(cols) }
         for (i in 0 until rows) {
-
             for (j in 0 until other.cols) {
                 for (k in 0 until cols) {
-                    result.data[i][j] += this.data[i][k] * other.data[k][j]
+                    resultData[i][j] += this.data[i][k] * other.data[k][j]
                 }
             }
         }
-        return result
-    }
-
-    override fun toString(): String {
-        val sb = StringBuilder()
-        for (i in 0 until rows) {
-            for (j in 0 until cols) {
-                sb.append("${data[i][j]}\t")
-            }
-            sb.append("\n")
-        }
-        return sb.toString()
+        return resultData
     }
 }
-fun main() {
-    val matrix1 = Matrix(3, 3)
-    matrix1.apply {
-        data[0][0] = 1
-        data[0][1] = 2
-        data[0][2] = 3
-        data[1][0] = 4
-        data[1][1] = 5
-        data[1][2] = 6
-        data[2][0] = 7
-        data[2][1] = 8
-        data[2][2] = 9
+fun print1(array:Array<IntArray>,row: Int,col: Int) {
+    println(" ( $row x $col Matrix):")
+    for (i in 0 until row)
+    {
+        for(j in 0 until col)
+        {
+            print("${array[i][j]}\t")
+        }
+        println()
     }
+}
+fun main()
+{
+    val a1=arrayOf(intArrayOf(3,-2,5), intArrayOf(3,0,4))
+    var a2=arrayOf(intArrayOf(2,3), intArrayOf(-9,0), intArrayOf(0,4))
+    var a3=arrayOf(intArrayOf(6,3), intArrayOf(9,0), intArrayOf(5,4))
+    var firstmatrix=Matrix(a1,2,3)
+    var secondmatrix=Matrix(a2,3,2)
+    var secondmatrix1=Matrix(a3,3,2)
+    println("******************Addition*****************")
+    print("Matirx:1")
+    print1(a2,3,2)
+    print("Matrix:2")
+    print1(a3,3,2)
+    print("Addition:")
+    var plusmatrix=secondmatrix+secondmatrix1
+    print1(plusmatrix,3,2)
 
-    val matrix2 = Matrix(3, 3)
-    matrix2.apply {
-        data[0][0] = 9
-        data[0][1] = 8
-        data[0][2] = 7
+    println("******************Subtraction*****************")
+    print("Matirx:1")
+    print1(a3,3,2)
+    print("Matrix:2")
+    print1(a2,3,2)
+    print("Subtraction:")
+    var minusmatrix=secondmatrix1-secondmatrix
+    print1(minusmatrix,3,2)
 
-        data[1][0] = 6
-        data[1][1] = 5
-        data[1][2] = 4
-
-        data[2][0] = 3
-        data[2][1] = 2
-        data[2][2] = 1
-    }
-
-    println("*********************** Addition **************************");
-    val sumMatrix = matrix1 + matrix2
-    println("Matrix 1:")
-    matrix1.showMatrix(matrix1);
-    println("Matrix 2:")
-    matrix2.showMatrix(matrix2);
-    println("Addition : ${sumMatrix}");
-
-
-    println("********************** Subtraction *************************");
-    val diffMatrix = matrix1 - matrix2
-    println("Matrix 1:")
-    matrix1.showMatrix(matrix1);
-    println("Matrix 2:")
-    matrix2.showMatrix(matrix2);
-    println(diffMatrix)
-
-
-    val productMatrix = matrix1 * matrix2
-    println("********************* Multiplication ***********************");
-    println("Matrix 1:")
-    matrix1.showMatrix(matrix1);
-    println("Matrix 2:")
-    matrix2.showMatrix(matrix2);
-    println(productMatrix)
+    println("******************Multiplication*****************")
+    print("Matirx:1")
+    print1(a1,2,3)
+    print("Matrix:2")
+    print1(a2,3,2)
+    print("Multiplication:")
+    var multimatrix=firstmatrix*secondmatrix
+    print1(multimatrix,2,2)
 }
